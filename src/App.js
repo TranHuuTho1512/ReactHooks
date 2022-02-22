@@ -1,22 +1,66 @@
 import logo from './logo.svg';
 import './App.css';
+import Nav from './views/Nav'
+import { useState, useEffect } from 'react';
+import Todo from './views/Todo';
+import Covid from './views/Covid';
 
-function App() {
+const App = () => {
+
+  let [name, setName] = useState('Milk');
+  const [address, setAddress] = useState('');
+  const [todos, setTodos] = useState([
+    { id: 'todo1', title: 'Watching TV', type: "Home" },
+    { id: 'todo2', title: 'Watching Movie', type: "Home" },
+    { id: 'todo3', title: 'Playing Game', type: "Movie" },
+    { id: 'todo4', title: 'Playing Soccer', type: "Movie" },
+
+  ]);
+
+  const handleEventClick = (event) => {
+    if (!address) {
+      alert('Empty input')
+      return;
+    }
+    let newTodo = { id: Math.floor(Math.random() * 10) + 1, title: address, type: 'Home' };
+    setTodos([...todos, newTodo])
+    setAddress('')
+  }
+  const handleEventOnchange = (event) => {
+
+    setAddress(event.target.value)
+
+  }
+
+  const deleteDataTodo = (id) => {
+    let currentTodos = todos;
+    currentTodos = currentTodos.filter(item => item.id !== id)
+    setTodos(currentTodos)
+  }
+
   return (
     <div className="App">
+
       <header className="App-header">
+        <Nav />
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Hello World and {name}</h1>
+        <Covid />
+
+        {/* <Todo
+          todos={todos}
+          title={'All todos'}
+          deleteDataTodo={deleteDataTodo}
+        />
+
+
+        <Todo
+          todos={todos.filter(item => item.type === 'Movie')}
+          title={`Home Todos`}
+          deleteDataTodo={deleteDataTodo}
+        /> */}
+        {/* <input type="text" value={address} onChange={(event) => handleEventOnchange(event)} />
+        <button type="button" onClick={(event) => handleEventClick(event)}>Click me</button> */}
       </header>
     </div>
   );
