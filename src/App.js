@@ -1,3 +1,4 @@
+import React from 'react'
 import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav'
@@ -5,6 +6,14 @@ import { useState, useEffect } from 'react';
 import Todo from './views/Todo';
 import Covid from './views/Covid';
 import { CountDown, NewCountDown } from './views/CountDown';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+
 
 const App = () => {
 
@@ -44,33 +53,35 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
 
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <CountDown onTimeup={onTimeup} />
-        <span>-------------------------</span>
-        <NewCountDown />
-        <h1>Hello World and {name}</h1>
-        <Covid />
+        </header>
+        <Switch>
+          <Route exact path="/">
+            <Covid />
+          </Route>
 
-        {/* <Todo
-          todos={todos}
-          title={'All todos'}
-          deleteDataTodo={deleteDataTodo}
-        />
-
-
-        <Todo
-          todos={todos.filter(item => item.type === 'Movie')}
-          title={`Home Todos`}
-          deleteDataTodo={deleteDataTodo}
-        /> */}
-        {/* <input type="text" value={address} onChange={(event) => handleEventOnchange(event)} />
-        <button type="button" onClick={(event) => handleEventClick(event)}>Click me</button> */}
-      </header>
-    </div>
+          <Route path="/timer">
+            <CountDown onTimeup={onTimeup} />
+            <span>-------------------</span>
+            <NewCountDown onTimeup={onTimeup} />
+          </Route>
+          <Route path="/todo">
+            <Todo
+              todos={todos}
+              title={'All todos'}
+              deleteDataTodo={deleteDataTodo}
+            />
+            <input type="text" value={address} onChange={(event) => handleEventOnchange(event)} />
+            <button type="button" onClick={(event) => handleEventClick(event)}>Click me</button>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
