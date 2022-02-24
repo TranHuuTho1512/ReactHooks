@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from "axios";
 import moment from "moment";
-const useFetch = (url) => {
+const useFetch = (url, isCovidData) => {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
@@ -15,7 +15,7 @@ const useFetch = (url) => {
                     cancelToken: ourRequest.token, // <-- 2nd step
                 })
                 let data = res && res.data ? res.data : [];
-                if (data && data.length > 0) {
+                if (data && data.length > 0 && isCovidData === true) {
                     data.map(item => {
                         item.Date = moment(item.Date).format("DD/MM/YYYY");
                         return item;

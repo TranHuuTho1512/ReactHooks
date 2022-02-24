@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import Todo from './views/Todo';
 import Covid from './views/Covid';
 import { CountDown, NewCountDown } from './views/CountDown';
+import Blog from './views/Blog';
+import DetailBlog from './views/DetailBlog';
 import {
   BrowserRouter as Router,
   Switch,
@@ -78,6 +80,12 @@ const App = () => {
             />
             <input type="text" value={address} onChange={(event) => handleEventOnchange(event)} />
             <button type="button" onClick={(event) => handleEventClick(event)}>Click me</button>
+          </Route>
+          <Route path="/blog" exact>
+            <Blog />
+          </Route>
+          <Route path="/blog/:id">
+            <DetailBlog />
           </Route>
         </Switch>
       </div>
