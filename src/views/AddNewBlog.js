@@ -6,7 +6,17 @@ const AddNewBlog = () => {
     const [content, setContent] = useState('');
 
     const handleBtnSubmit = () => {
-        console.log('Check data', title, content);
+
+        if (!title) {
+            alert('Empty title');
+            return;
+        }
+
+        if (!content) {
+            alert('Empty content');
+            return;
+        }
+        console.log('Title: ', title, '---- Content: ', content);
     }
     return (
         <div className="add-new-container">
