@@ -34,3 +34,29 @@
         padding-top: 10px;
     }
 }
+.btn-add-new {
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.add-new-container {
+    max-width: 400px;
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: left;
+    .text-add-new {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .inputs-data {
+        padding: 5px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+    button {
+        margin: 10px;
+    }
+}
